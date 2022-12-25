@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://pg_db:5432/news_db
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+
+news-service:
+  product-token: BW2oaAcpomJj0OBB0iHvZDBlvXMB3HhMJwid56popEkfvDIHhh
