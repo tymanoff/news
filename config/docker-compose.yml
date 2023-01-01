@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  pg_db:
+    image: 'postgres:9.6.12-alpine'
+    container_name: postgres_container
+    environment:
+      - DB_NAME=news_db
+      - PGDATA=/var/lib/postgresql/data/news_db
+      - POSTGRES_PASSWORD=123456
+      - TABLEFUNC_SCHEMA=news
+      - DBMIGRATION_USER=postgres
+      - DBMIGRATION_PASS=123456
+    volumes:
+      - ./postgres/scripts:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    restart: always
+  app:
+    image: app
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - pg_db
+    ports:
+      - 8080:8080
+    restart: always
